@@ -11,9 +11,6 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{02756ed4-8bc7-4060-96a0-114c97ea37dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\01. Core">
-      <UniqueIdentifier>{7b4f18de-b780-49f6-844a-1acc8c3fdeb1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\02. Manager">
       <UniqueIdentifier>{f2f869a8-d2b1-4c6c-abf6-3942380e48b8}</UniqueIdentifier>
     </Filter>
@@ -34,6 +31,9 @@
     </Filter>
     <Filter Include="Engine\07. Module">
       <UniqueIdentifier>{ec499769-3097-4d06-8abb-b25ff4a1a933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Core">
+      <UniqueIdentifier>{7b4f18de-b780-49f6-844a-1acc8c3fdeb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
