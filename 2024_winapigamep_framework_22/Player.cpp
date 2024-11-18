@@ -24,7 +24,6 @@ Player::Player()
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
-
 }
 Player::~Player()
 {
@@ -34,13 +33,25 @@ Player::~Player()
 void Player::Update()
 {
 	Vec2 vPos = GetPos();
+	Vec2 dir = { 0,0 };
 	//if(GET_KEY(KEY_TYPE::LEFT))
 	if (GET_KEY(KEY_TYPE::A))
-		vPos.x -= 100.f * fDT;
+		dir.x = -1;
 	if (GET_KEY(KEY_TYPE::D))
-		vPos.x += 100.f * fDT;
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+		dir.x = 1;
+	if (GET_KEY(KEY_TYPE::W))
+		dir.y = -1;
+	if (GET_KEY(KEY_TYPE::S))
+		dir.y = 1;
+
+	if (timer >= m_atkCooldown && GET_KEY(KEY_TYPE::LBUTTON))
+	{
+		timer = 0;
 		CreateProjectile();
+	}
+	timer += fDT;
+	
+	vPos += (dir.Normalize() * fDT) * 200;
 	SetPos(vPos);
 }
 
@@ -75,19 +86,13 @@ void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
 	Vec2 vPos = GetPos();
-	vPos.y -= GetSize().y / 2.f;
+	Vec2 mousePos = GET_MOUSEPOS;
+
 	pProj->SetPos(vPos);
 	pProj->SetSize({30.f,30.f});
-	// 도 -> 라디안: PI / 180
-	//pProj->SetAngle(PI / 4 * 7.f); // 1
-	//static float angle = 0.f;
-	//pProj->SetAngle(angle * PI / 180); // 2
-	//angle += 10.f;
-	pProj->SetDir({0.f, -1.f});
-	pProj->SetName(L"PlayerBullet");
-	//Vec2 a = { 10.f, 10.f };
-	//Vec2 b = { 0.f, 0.f };
-	//Vec2 c = a / b;
 
+	pProj->SetDir((mousePos - vPos).Normalize());
+	pProj->SetName(L"PlayerBullet");
+	
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pProj, LAYER::PROJECTILE);
 }

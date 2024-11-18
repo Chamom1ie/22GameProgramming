@@ -12,5 +12,7 @@ public:
 private:
 	void CreateProjectile();
 	Texture* m_pTex;
+	float m_atkCooldown = 0.2f;
+	float timer = 0;
 };
 

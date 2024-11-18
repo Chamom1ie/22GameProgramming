@@ -30,7 +30,7 @@ public:
 	{
 		return m_vecKey[(int)_eKey].eState;
 	}
-	const POINT& GetMousePos() const { return m_ptMouse; }
+	const Vec2& GetMousePos() const { return m_ptMouse; }
 private:
 	POINT			 m_ptMouse = {};
 	vector<tKeyInfo> m_vecKey;

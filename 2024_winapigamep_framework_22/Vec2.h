@@ -48,14 +48,15 @@ public:
 	{
 		return ::sqrt(LengthSquared());
 	}
-	void Normalize()
+	Vec2 Normalize()
 	{
 		float len = Length();
 		// 0¿Ã∏È æ»µ≈.
 		if (len < FLT_EPSILON)
-			return;
+			return *this;
 		x /= len;
 		y /= len;
+		return *this;
 	}
 	float Dot(Vec2 _other)
 	{

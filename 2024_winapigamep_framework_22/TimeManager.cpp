@@ -38,7 +38,7 @@ void TimeManager::Update()
 		//		str.c_str(),str.length());
 		//std::format();
 		//POINT mousepos = GET_SINGLE(InputManager)->GetMousePos();
-		POINT mousepos = GET_MOUSEPOS;
+		Vec2 mousepos = GET_MOUSEPOS;
 		static wchar_t buf[100] = {};
 		swprintf_s(buf, L"FPS: %d, DT: %f, Mouse: (%d, %d)",m_fps, m_dT
 										,mousepos.x, mousepos.y);
