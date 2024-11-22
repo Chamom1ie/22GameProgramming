@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "InventoryManager.h"
 bool Core::Init(HWND _hwnd)
 {
 	// 변수 초기화
@@ -28,6 +29,8 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(InputManager)->Init();
 	GET_SINGLE(ResourceManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
+	GET_SINGLE(InventoryManager)->Init();
+
 
 	//m_obj.SetPos(Vec2(SCREEN_WIDTH / 2
 	//				,SCREEN_HEIGHT/ 2));
