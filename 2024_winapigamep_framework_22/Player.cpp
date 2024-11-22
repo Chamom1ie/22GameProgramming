@@ -43,6 +43,8 @@ void Player::Update()
 		dir.y = -1;
 	if (GET_KEY(KEY_TYPE::S))
 		dir.y = 1;
+	if (GET_KEYDOWN(KEY_TYPE::TAB))
+		ShowInventory();
 
 	if (timer >= m_atkCooldown && GET_KEY(KEY_TYPE::LBUTTON))
 	{
