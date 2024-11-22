@@ -14,5 +14,6 @@ private:
 	Texture* m_pTex;
 	float m_atkCooldown = 0.2f;
 	float timer = 0;
+	bool _enable = false;
 };
 
