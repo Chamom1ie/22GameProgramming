@@ -34,8 +34,7 @@ Player::~Player()
 void Player::Update()
 {
 	if (GET_KEYDOWN(KEY_TYPE::TAB))
-		ShowInventory();
-
+		ToggleInventory();
 	if (!_enable) return;
 
 	Vec2 vPos = GetPos();
@@ -88,11 +87,11 @@ void Player::Render(HDC _hdc)
 	//::PlgBlt();
 }
 
-void Player::ShowInventory()
+void Player::ToggleInventory()
 {
 	//if (GET_SINGLE(WaveManager)->IsWaveEnd())
 	{
-		_enable = false;
+		_enable = !_enable;
 		GET_SINGLE(InventoryManager)->ToggleInventory();
 	}
 }

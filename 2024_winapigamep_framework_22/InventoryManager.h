@@ -4,7 +4,6 @@ class InventoryManager
 {
 	DECLARE_SINGLE(InventoryManager);
 private:
-	InventoryManager();
 	~InventoryManager();
 private:
 	void Show();
@@ -16,9 +15,11 @@ public:
 	void Render(HDC _hdc);
 	void ToggleInventory();
 private:
-	bool m_activeSelf;
+	bool m_activeSelf = false;
 	int m_InventorySize = SCREEN_WIDTH;
+	vector<Battery*> m_vecBatteries;
+	Vec2 m_curCell {};
 	Battery* m_curBattery = nullptr;
-	vector<Battery*> m_vecBatteries = {};
+	Battery* m_batteryCells[6][6] = {};
 };
 
