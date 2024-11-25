@@ -9,12 +9,12 @@ public:
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-	void ShowInventory();
+	void ToggleInventory();
 private:
 	void CreateProjectile();
 	Texture* m_pTex;
 	float m_atkCooldown = 0.2f;
 	float timer = 0;
-	bool _enable = false;
+	bool _enable = true;
 };
 
