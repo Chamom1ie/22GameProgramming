@@ -1,4 +1,5 @@
 #pragma once
+class Cell;
 class Battery;
 class InventoryManager
 {
