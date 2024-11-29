@@ -139,6 +139,7 @@
     <ClInclude Include="InventoryManager.h">
       <Filter>Engine\00. System</Filter>
     </ClInclude>
+    <ClInclude Include="Cell.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -232,5 +233,6 @@
     <ClCompile Include="InventoryManager.cpp">
       <Filter>Engine\00. System</Filter>
     </ClCompile>
+    <ClCompile Include="Cell.cpp" />
   </ItemGroup>
 </Project>

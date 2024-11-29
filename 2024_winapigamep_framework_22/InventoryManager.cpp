@@ -20,6 +20,9 @@ void InventoryManager::Update()
 {
 	if (m_activeSelf)
 	{
+
+		#pragma region Test
+
 		if (GET_KEYDOWN(KEY_TYPE::H))
 		{
 			Battery* btr = new Battery;
@@ -28,6 +31,9 @@ void InventoryManager::Update()
 			m_vecBatteries.push_back(btr);
 			cout << m_vecBatteries.size();
 		}
+
+		#pragma endregion
+
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
 		{
 			TryInteract(GET_MOUSEPOS);
@@ -131,13 +137,31 @@ void InventoryManager::Hide()
 void InventoryManager::TryInteract(Vec2 _mousePos)
 {
 	POINT mousePos = { (long)_mousePos.x, (long)_mousePos.y };
-	if (m_curBattery == nullptr)
+	if (m_curBattery != nullptr)
 	{
 		for (int y = 0; y < 6; ++y)
 		for (int x = 0; x < 6; ++x)
 		{
-			if (m_batteryCells[x][y] == nullptr) return;
+			if (m_batteryCells[x][y] == nullptr) continue;
 
+			cout << "에엥";
+
+			RECT rt = m_batteryCells[x][y]->GetRect();
+			POINT mousePos = { (long)_mousePos.x, (long)_mousePos.y };
+
+			if (PtInRect(&rt, mousePos))
+			{
+				cout << "그니까 이게되니까 지금 이러지";
+				m_curCell = { x,y };
+			}
+		}
+	}
+	else
+	{
+		for (int y = 0; y < 6; ++y)
+		for (int x = 0; x < 6; ++x)
+		{
+			if (m_batteryCells[x][y] == nullptr) continue;
 			RECT rt = m_batteryCells[x][y]->GetRect();
 			if (PtInRect(&rt, mousePos))
 			{
@@ -147,7 +171,7 @@ void InventoryManager::TryInteract(Vec2 _mousePos)
 
 		for (auto btr : m_vecBatteries)
 		{
-			if (btr == nullptr) return;
+			if (btr == nullptr) continue;
 
 			RECT rt = btr->GetRect();
 			if (PtInRect(&rt, mousePos))
@@ -157,24 +181,6 @@ void InventoryManager::TryInteract(Vec2 _mousePos)
 			}
 		}
 	}
-	/*
-	else
-	{
-		for (int y = 0; y < 6; ++y)
-		for (int x = 0; x < 6; ++x)
-		{
-			if (m_batteryCells[x][y] == nullptr) return;
-
-			RECT rt = m_batteryCells[x][y]->GetRect();
-			POINT mousePos = { (long)_mousePos.x, (long)_mousePos.y };
-
-			if (PtInRect(&rt, mousePos))
-			{
-				m_curCell = { x,y };
-			}
-		}
-	}
-	*/
 }
 
 void InventoryManager::ToggleInventory()
