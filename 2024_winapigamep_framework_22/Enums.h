@@ -30,3 +30,11 @@ enum class EVENT_TYPE
 	SCENE_CHANGE,
 	END,
 };
+
+enum class ENEMY_TYPE
+{
+	MELEE,
+	RANGE,
+	TANK,
+	END
+};

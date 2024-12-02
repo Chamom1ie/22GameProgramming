@@ -75,3 +75,91 @@ public:
 	float x = 0.f;
 	float y = 0.f;
 };
+
+struct Vec2Int
+{
+    Vec2Int() {}
+    Vec2Int(int x, int y) : x(x), y(y) {}
+    Vec2Int(POINT pt) : x(pt.x), y(pt.y) {}
+    Vec2Int(const Vec2& _pos) : x(_pos.x), y(_pos.y) {}
+
+    Vec2Int operator+(const Vec2Int& other)
+    {
+        Vec2Int ret;
+        ret.x = x + other.x;
+        ret.y = y + other.y;
+        return ret;
+    }
+
+    Vec2Int operator-(const Vec2Int& other)
+    {
+        Vec2Int ret;
+        ret.x = x - other.x;
+        ret.y = y - other.y;
+        return ret;
+    }
+
+    Vec2Int operator*(int value)
+    {
+        Vec2Int ret;
+        ret.x = x * value;
+        ret.y = y * value;
+        return ret;
+    }
+
+    bool operator<(const Vec2Int& other) const
+    {
+        if (x != other.x)
+            return x < other.x;
+
+        return y < other.y;
+    }
+
+    bool operator>(const Vec2Int& other) const
+    {
+        if (x != other.x)
+            return x > other.x;
+
+        return y > other.y;
+    }
+
+    bool operator==(const Vec2Int& other)
+    {
+        return x == other.x && y == other.y;
+    }
+
+    void operator+=(const Vec2Int& other)
+    {
+        x += other.x;
+        y += other.y;
+    }
+
+    void operator-=(const Vec2Int& other)
+    {
+        x -= other.x;
+        y -= other.y;
+    }
+
+    int LengthSquared()
+    {
+        return x * x + y * y;
+    }
+
+    float Length()
+    {
+        return (float)::sqrt(LengthSquared());
+    }
+
+    int Dot(Vec2Int other)
+    {
+        return x * other.x + y * other.y;
+    }
+
+    int Cross(Vec2Int other)
+    {
+        return x * other.y - y * other.x;
+    }
+
+    int x = 0;
+    int y = 0;
+};

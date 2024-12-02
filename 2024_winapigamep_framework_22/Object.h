@@ -1,4 +1,14 @@
 #pragma once
+
+struct Stat
+{
+	int hp;
+	float moveSpeed;
+	float atkRange;
+	float atkCooldown;
+	int atkDamage;
+};
+
 class Collider;
 class Component;
 class Object
@@ -24,7 +34,7 @@ public:
 	void SetDead() { m_IsDie = true; }
 	void SetName(wstring _name) { m_name = _name; }
 	const wstring& GetName() const { return m_name; }
-
+	virtual void ApplyDamage(int damage) { m_stat.hp -= damage; }
 private:
 	bool m_IsDie;
 	wstring m_name;
@@ -48,11 +58,11 @@ public:
 		}
 		return component;
 	}
-private:
-	//POINT m_ptPos;
-	//POINT m_ptSize;
+protected:
 	Vec2 m_vPos;
 	Vec2 m_vSize;
+	Stat m_stat;
+private:
 	vector<Component*> m_vecComponents;
 };
 

@@ -10,9 +10,11 @@
 #include<unordered_map>
 #include<set>
 #include<unordered_set>
+#include<stack>
 #include<string>
 #include<algorithm>
 #include<ctime>
+#include<random>
 #define _USE_MATH_DEFINES
 #include<math.h>
 
@@ -30,7 +32,9 @@
 // 각종 using
 using std::vector;
 using std::map;
+using std::list;
 using std::wstring;
+using std::clamp;
 
 // 각종 define
 #define PI 3.14159265f
