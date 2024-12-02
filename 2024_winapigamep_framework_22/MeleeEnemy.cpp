@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "MeleeEnemy.h"
+#include "Collider.h"
 #include "TimeManager.h"
 #include "WaveManager.h"
 #include "AStarPathFinder.h"
+#include "GDISelector.h"
 
 MeleeEnemy::MeleeEnemy()
 {
@@ -11,6 +13,9 @@ MeleeEnemy::MeleeEnemy()
 	m_stat.atkRange = 50.f;
 	m_stat.atkCooldown = 1.f;
 	m_stat.atkDamage = 5;
+	m_vSize = { 30, 30 };
+	this->AddComponent<Collider>();
+	this->GetComponent<Collider>()->SetSize(m_vSize);
 }
 
 MeleeEnemy::~MeleeEnemy()
@@ -25,8 +30,12 @@ void MeleeEnemy::Update()
 
 void MeleeEnemy::Render(HDC _hdc)
 {
-
+	HPEN newPen = CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+	HPEN oldPen = (HPEN)SelectObject(_hdc, newPen);
+	GDISelector brush = { _hdc, BRUSH_TYPE::HOLLOW };
 	RECT_RENDER(_hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
+	DeleteObject(newPen);
+	SelectObject(_hdc, oldPen);
 }
 
 void MeleeEnemy::UpdateState()
