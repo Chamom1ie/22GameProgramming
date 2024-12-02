@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Projectile.h"
+#include "PlayerBullet.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Texture.h"
@@ -110,7 +110,6 @@ void Player::ToggleInventory()
 
 void Player::CreateProjectile()
 {
-
 	int paraCnt = GET_SINGLE(InventoryManager)->GetParaCount();
 	int seriCnt = GET_SINGLE(InventoryManager)->GetSeriCount();
 	int damage = seriCnt; //ceil((float)seriCnt / paraCnt);

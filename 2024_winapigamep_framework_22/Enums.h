@@ -7,7 +7,7 @@ enum class LAYER
 	PROJECTILE,
 	ENEMY,
 	// UI
-	END = 30
+	END
 };
 
 enum class PEN_TYPE
