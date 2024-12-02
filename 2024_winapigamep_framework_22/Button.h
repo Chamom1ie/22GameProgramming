@@ -1,9 +1,10 @@
 #pragma once
-class Cell
+class Button
 {
 public:
-	Cell();
-	virtual ~Cell();
+	Button();
+	Button(Vec2 size, Vec2 pos);
+	~Button();
 public:
 	RECT GetRect() {
 		RECT rect

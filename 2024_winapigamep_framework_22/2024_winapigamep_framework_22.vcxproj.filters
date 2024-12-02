@@ -35,7 +35,7 @@
     <Filter Include="Engine\01. Core">
       <UniqueIdentifier>{7b4f18de-b780-49f6-844a-1acc8c3fdeb1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\00. System">
+    <Filter Include="Engine\KJH">
       <UniqueIdentifier>{dd89297d-7464-4aed-9906-8dfdd4b87cc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -131,15 +131,17 @@
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
     <ClInclude Include="Battery.h">
-      <Filter>Engine\00. System</Filter>
+      <Filter>Engine\KJH</Filter>
     </ClInclude>
     <ClInclude Include="Circuit.h">
-      <Filter>Engine\00. System</Filter>
+      <Filter>Engine\KJH</Filter>
     </ClInclude>
     <ClInclude Include="InventoryManager.h">
-      <Filter>Engine\00. System</Filter>
+      <Filter>Engine\KJH</Filter>
     </ClInclude>
-    <ClInclude Include="Cell.h" />
+    <ClInclude Include="Button.h">
+      <Filter>Engine\KJH</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -225,14 +227,16 @@
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="Battery.cpp">
-      <Filter>Engine\00. System</Filter>
+      <Filter>Engine\KJH</Filter>
     </ClCompile>
     <ClCompile Include="Circuit.cpp">
-      <Filter>Engine\00. System</Filter>
+      <Filter>Engine\KJH</Filter>
     </ClCompile>
     <ClCompile Include="InventoryManager.cpp">
-      <Filter>Engine\00. System</Filter>
+      <Filter>Engine\KJH</Filter>
     </ClCompile>
-    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\KJH</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

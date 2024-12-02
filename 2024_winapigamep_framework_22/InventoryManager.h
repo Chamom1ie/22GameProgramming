@@ -1,6 +1,7 @@
 #pragma once
 class Cell;
 class Battery;
+class Button;
 class InventoryManager
 {
 	DECLARE_SINGLE(InventoryManager);
@@ -9,18 +10,24 @@ private:
 private:
 	void Show();
 	void Hide();
-	void TryInteract(Vec2 _mousePos);
+	void TryInteractToSeri(Vec2 _mousePos);
+	void TryInteractToPara(Vec2 _mousePos);
 public:
 	void Init();
 	void Update();
 	void Render(HDC _hdc);
 	void ToggleInventory();
+	int GetSeriCount() { return m_seriCount; }
+	int GetParaCount() { return m_paraCount; }
 private:
 	bool m_activeSelf = false;
 	int m_InventorySize = SCREEN_WIDTH;
-	vector<Battery*> m_vecBatteries;
-	Vec2 m_curCell {};
-	Battery* m_curBattery = nullptr;
-	Battery* m_batteryCells[6][6] = {};
+	int m_seriCount = 0;
+	int m_paraCount = 0;
+	int m_batteryCount = 0;
+	Button* m_addSeriBtn;
+	Button* m_subSeriBtn;
+	Button* m_addParaBtn;
+	Button* m_subParaBtn;
 };
 
