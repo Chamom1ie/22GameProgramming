@@ -35,8 +35,8 @@
     <Filter Include="Engine\01. Core">
       <UniqueIdentifier>{7b4f18de-b780-49f6-844a-1acc8c3fdeb1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\06. Component\AStar">
-      <UniqueIdentifier>{afedae61-f227-42bb-99f6-ab6f6a68d2f8}</UniqueIdentifier>
+    <Filter Include="Engine\00. System">
+      <UniqueIdentifier>{dd89297d-7464-4aed-9906-8dfdd4b87cc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,24 +130,16 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="MeleeEnemy.h">
-      <Filter>Engine\03. Object</Filter>
+    <ClInclude Include="Battery.h">
+      <Filter>Engine\00. System</Filter>
     </ClInclude>
-    <ClInclude Include="WaveManager.h">
-      <Filter>Engine\02. Manager</Filter>
+    <ClInclude Include="Circuit.h">
+      <Filter>Engine\00. System</Filter>
     </ClInclude>
-    <ClInclude Include="AStarNode.h">
-      <Filter>Engine\06. Component\AStar</Filter>
+    <ClInclude Include="InventoryManager.h">
+      <Filter>Engine\00. System</Filter>
     </ClInclude>
-    <ClInclude Include="AStarPathFinder.h">
-      <Filter>Engine\06. Component\AStar</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarGrid.h">
-      <Filter>Engine\06. Component\AStar</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="RangeEnemy.h" />
-    <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="Cell.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -232,23 +224,15 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="MeleeEnemy.cpp">
-      <Filter>Engine\03. Object</Filter>
+    <ClCompile Include="Battery.cpp">
+      <Filter>Engine\00. System</Filter>
     </ClCompile>
-    <ClCompile Include="WaveManager.cpp">
-      <Filter>Engine\02. Manager</Filter>
+    <ClCompile Include="Circuit.cpp">
+      <Filter>Engine\00. System</Filter>
     </ClCompile>
-    <ClCompile Include="AStarNode.cpp">
-      <Filter>Engine\06. Component\AStar</Filter>
+    <ClCompile Include="InventoryManager.cpp">
+      <Filter>Engine\00. System</Filter>
     </ClCompile>
-    <ClCompile Include="AStarPathFinder.cpp">
-      <Filter>Engine\06. Component\AStar</Filter>
-    </ClCompile>
-    <ClCompile Include="AStarGrid.cpp">
-      <Filter>Engine\06. Component\AStar</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="RangeEnemy.cpp" />
-    <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="Cell.cpp" />
   </ItemGroup>
 </Project>

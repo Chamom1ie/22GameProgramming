@@ -10,6 +10,7 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "InventoryManager.h"
 Player::Player()
 	: m_pTex(nullptr)
 {
@@ -32,6 +33,10 @@ Player::~Player()
 }
 void Player::Update()
 {
+	if (GET_KEYDOWN(KEY_TYPE::TAB))
+		ToggleInventory();
+	if (!_enable) return;
+
 	Vec2 vPos = GetPos();
 	Vec2 dir = { 0,0 };
 	//if(GET_KEY(KEY_TYPE::LEFT))
@@ -80,6 +85,15 @@ void Player::Render(HDC _hdc)
 	//::StretchBlt();
 	//::AlphaBlend();
 	//::PlgBlt();
+}
+
+void Player::ToggleInventory()
+{
+	//if (GET_SINGLE(WaveManager)->IsWaveEnd())
+	{
+		_enable = !_enable;
+		GET_SINGLE(InventoryManager)->ToggleInventory();
+	}
 }
 
 void Player::CreateProjectile()

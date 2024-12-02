@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "InventoryManager.h"
 bool Core::Init(HWND _hwnd)
 {
 	// 변수 초기화
@@ -28,6 +29,8 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(InputManager)->Init();
 	GET_SINGLE(ResourceManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
+	GET_SINGLE(InventoryManager)->Init();
+
 
 	//m_obj.SetPos(Vec2(SCREEN_WIDTH / 2
 	//				,SCREEN_HEIGHT/ 2));
@@ -78,6 +81,7 @@ void Core::MainUpdate()
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
 	GET_SINGLE(CollisionManager)->Update();
+	GET_SINGLE(InventoryManager)->Update();
 
 }
 
@@ -87,6 +91,7 @@ void Core::MainRender()
 	::PatBlt(m_hBackDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACKNESS);
 	// 2. Render
 	GET_SINGLE(SceneManager)->Render(m_hBackDC);
+	GET_SINGLE(InventoryManager)->Render(m_hBackDC);
 	// 3. display	
 	::BitBlt(m_hDC, 0,0, SCREEN_WIDTH,SCREEN_HEIGHT,
 			m_hBackDC,0,0, SRCCOPY);
