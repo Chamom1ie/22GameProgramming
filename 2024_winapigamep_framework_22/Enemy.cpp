@@ -1,13 +1,11 @@
 #include "pch.h"
 #include "Enemy.h"
-#include "Collider.h"
 #include "AStarPathFinder.h"
 #include "EventManager.h"
+#include "Collider.h"
 
 Enemy::Enemy()
 {
-	this->AddComponent<Collider>();
-	this->GetComponent<Collider>()->SetSize({ 100, 100 });
 }
 
 Enemy::~Enemy()

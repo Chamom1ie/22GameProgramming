@@ -66,7 +66,6 @@ void WaveManager::SpawnWave()
         ENEMY_TYPE type = wave.spawnEnemies[typeIdx(m_mt)];
         Enemy* enemy = m_enemyTable[(int)type].top();
         enemy->SetPos({ 150 * m_remainEnemyCnt, 300 });
-        enemy->SetSize({ 100, 100 });
         enemy->SetName(L"Enemy");
         enemy->SetTarget(m_player);
         enemy->AddComponent<AStarPathFinder>();
