@@ -59,7 +59,6 @@ void Player::Update()
 	
 	vPos += (dir.Normalize() * fDT) * 200;
 
-	cout << GetSize().x << endl;
 	//Vec2 minPos = { (float)(0 + GetSize().x / 2), (float)(((SCREEN_HEIGHT - SCREEN_WIDTH) / 2) + GetSize().y / 2) };
 	Vec2 minPos = { 0.f, (float)((SCREEN_HEIGHT - SCREEN_WIDTH) / 2) };
 	//Vec2 maxPos = { (float)(SCREEN_WIDTH - GetSize().x / 2), (float)((SCREEN_HEIGHT/2 + SCREEN_WIDTH / 2) - GetSize().y / 2)};
@@ -115,7 +114,7 @@ void Player::CreateProjectile()
 	int damage = seriCnt; //ceil((float)seriCnt / paraCnt);
 	for (int i = 1; i <= paraCnt; ++i)
 	{
-		Projectile* pProj = new Projectile;
+		PlayerBullet* pProj = new PlayerBullet;
 		Vec2 vPos = GetPos();
 		Vec2 mousePos = GET_MOUSEPOS;
 
@@ -129,8 +128,6 @@ void Player::CreateProjectile()
 
 		float radian1 = atan2(dir.y, dir.x);
 		float deg = RAD2DEG(radian1) - projAngle / 2;
-
-		cout << paraCnt << endl;
 
 		float radian2 = DEG2RAD(deg + betweenAngle * i);
 		Vec2 dir2 = { cosf(radian2), sinf(radian2) };
