@@ -18,6 +18,11 @@ public:
 		m_vDir = _dir;
 		m_vDir.Normalize();
 	}
+	void SetDamage(float _damage)
+	{
+		m_damage = _damage;
+	}
+	float GetDamage() { return m_damage; }
 public:
 	virtual void EnterCollision(Collider* _other) = 0;
 	virtual void StayCollision(Collider* _other) = 0;
@@ -25,6 +30,7 @@ public:
 private:
 	//float m_dir;
 	float m_angle;
+	float m_damage;
 	Vec2 m_vDir;
 };
 
