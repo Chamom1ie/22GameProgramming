@@ -1,7 +1,7 @@
 #pragma once
-#include "Cell.h"
-class Battery : public Cell
+class Battery
 {
 public:
-private:
+	Battery();
+	~Battery();
 };

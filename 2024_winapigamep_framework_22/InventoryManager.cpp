@@ -4,6 +4,7 @@
 #include "InputManager.h"
 #include "Battery.h"
 #include "Texture.h"
+#include "Button.h"
 
 InventoryManager::~InventoryManager()
 {
@@ -12,8 +13,20 @@ InventoryManager::~InventoryManager()
 
 void InventoryManager::Init()
 {
+	Vec2 btnSize = Vec2(120, 60);
+	Vec2 btnPos = { (int)SCREEN_WIDTH / 5, ((int)((SCREEN_HEIGHT - m_InventorySize / 2) + btnSize.y)) };
+	btnPos.x -= SCREEN_WIDTH / 64;
+
+	m_addSeriBtn = new Button(btnSize, btnPos);
+	btnPos.x += SCREEN_WIDTH / 8 + btnSize.x /2;
+	m_subSeriBtn = new Button(btnSize, btnPos);
+	btnPos.x += SCREEN_WIDTH / 8 + btnSize.x / 2;
+	m_addParaBtn = new Button(btnSize, btnPos);
+	btnPos.x += SCREEN_WIDTH / 8 + btnSize.x / 2;
+	m_subParaBtn = new Button(btnSize, btnPos);
 	m_activeSelf = false;
-	m_vecBatteries.clear();
+	m_seriCount = 1;
+	m_paraCount = 1;
 }
 
 void InventoryManager::Update()
@@ -25,25 +38,15 @@ void InventoryManager::Update()
 
 		if (GET_KEYDOWN(KEY_TYPE::H))
 		{
-			Battery* btr = new Battery;
-			int btrCnt = m_vecBatteries.size();
-			if (btrCnt >= 5) return;
-			m_vecBatteries.push_back(btr);
-			cout << m_vecBatteries.size();
+			m_batteryCount++;
 		}
 
 		#pragma endregion
 
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
 		{
-			TryInteract(GET_MOUSEPOS);
-			if (m_curBattery != nullptr && 
-				m_curCell != Vec2(0, 0) && 
-				m_batteryCells[(int)m_curCell.x][(int)m_curCell.y] == nullptr)
-			{
-				m_batteryCells[(int)m_curCell.x][(int)m_curCell.y] = m_curBattery;
-				m_curBattery = nullptr;
-			}
+			TryInteractToSeri(GET_MOUSEPOS);
+			TryInteractToPara(GET_MOUSEPOS);
 		}
 	}
 }
@@ -55,72 +58,24 @@ void InventoryManager::Render(HDC _hdc)
 		Vec2 inventoryPos = { SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 };
 		RECT_RENDER(_hdc, inventoryPos.x, inventoryPos.y, m_InventorySize, m_InventorySize);
 
-		Vec2 coreSize = { 50,50 };
-		Vec2 corePos = { (int)((coreSize.x / 2) + (coreSize.x / 4)), SCREEN_HEIGHT / 2 };
-		ELLIPSE_RENDER(_hdc, corePos.x, corePos.y, 50, 50);
+		RECT_RENDER(_hdc, m_addSeriBtn->GetPos().x, m_addSeriBtn->GetPos().y, m_addSeriBtn->GetSize().x, m_addSeriBtn->GetSize().y);
+		RECT_RENDER(_hdc, m_subSeriBtn->GetPos().x, m_subSeriBtn->GetPos().y, m_subSeriBtn->GetSize().x, m_subSeriBtn->GetSize().y);
+		RECT_RENDER(_hdc, m_addParaBtn->GetPos().x, m_addParaBtn->GetPos().y, m_addParaBtn->GetSize().x, m_addParaBtn->GetSize().y);
+		RECT_RENDER(_hdc, m_subParaBtn->GetPos().x, m_subParaBtn->GetPos().y, m_subParaBtn->GetSize().x, m_subParaBtn->GetSize().y);
 
-		Vec2 gunSize = { 50,50 };
-		Vec2 gunPos = { (int)(SCREEN_WIDTH - (gunSize.x / 2) - (gunSize.x / 4)), SCREEN_HEIGHT / 2 };
-		RECT_RENDER(_hdc, gunPos.x, gunPos.y, gunSize.x, gunSize.y);
+		Vec2 btrCountSize = { 150 , 100 };
+		int padding = 75;
+		Vec2 btrCountPos = { SCREEN_WIDTH / 2 - btrCountSize.x / 2 - padding, SCREEN_HEIGHT / 2 - m_InventorySize / 2 + btrCountSize.y / 2 + padding };
 
+		std::wstring seriStr = std::to_wstring(m_seriCount);
+		RECT_RENDER(_hdc, btrCountPos.x, btrCountPos.y, btrCountSize.x, btrCountSize.y);
+		TextOut(_hdc, btrCountPos.x, (btrCountPos.y + btrCountSize.y / 2 + btrCountSize.y / 4), seriStr.c_str(), seriStr.length());
 
-		int originY = SCREEN_HEIGHT / 2 - m_InventorySize / 2;
-		int padding = 5;
+		std::wstring paraStr = std::to_wstring(m_paraCount);
+		btrCountPos = { SCREEN_WIDTH / 2 + btrCountSize.x / 2 + padding, SCREEN_HEIGHT / 2 - m_InventorySize / 2 + btrCountSize.y / 2 + padding };
+		RECT_RENDER(_hdc, btrCountPos.x, btrCountPos.y, btrCountSize.x, btrCountSize.y);
+		TextOut(_hdc, btrCountPos.x, (btrCountPos.y + btrCountSize.y / 2 + btrCountSize.y / 4), paraStr.c_str(), paraStr.length());
 
-		Vec2 btrSize = { 90,60 };
-		Vec2 btrPos =
-		{
-			(int)(50 + btrSize.x / 2),
-			(int)(originY + btrSize.y / 2)
-		};
-		btrPos.x += 25.f;
-		btrPos.y += ((btrSize.y + padding) * 2.5f) + padding;
-		for (int y = 0; y < 6; ++y)
-		for (int x = 0; x < 6; ++x)
-		{
-			RECT_RENDER(_hdc, 
-				btrPos.x + (btrSize.x + padding) * x, 
-				btrPos.y + (btrSize.y + padding) * y, 
-				btrSize.x, 
-				btrSize.y);
-			if (m_batteryCells[x][y] != nullptr)
-			{
-				GDISelector selector(_hdc, BRUSH_TYPE::YELLOW);
-				RECT_RENDER(_hdc,
-					btrPos.x + (btrSize.x + padding) * x,
-					btrPos.y + (btrSize.y + padding) * y,
-					btrSize.x,
-					btrSize.y);
-				m_batteryCells[x][y]->SetPos(btrPos);
-				m_batteryCells[x][y]->SetSize(btrSize);
-			}
-		}
-
-		int formalBtrSizeX = 140;
-		int formalBtrSizey = 90;
-		int formalBtrX = formalBtrSizeX / 2;
-		int formalBtrY = (SCREEN_HEIGHT / 2) + (m_InventorySize / 2) - (formalBtrSizey / 2) - padding;
-
-		for (int i = 0; i < 5; i++)
-		{
-			int cnt = m_vecBatteries.size();
-			if (cnt <= i) continue;
-			if (m_vecBatteries[i] != nullptr)
-			{
-				m_vecBatteries[i]->SetPos(Vec2(formalBtrX, formalBtrY));
-				m_vecBatteries[i]->SetSize(Vec2(formalBtrSizeX,formalBtrSizey));
-
-				GDISelector selector(_hdc, BRUSH_TYPE::YELLOW);
-				RECT_RENDER(_hdc, formalBtrX, formalBtrY, formalBtrSizeX, formalBtrSizey);
-				formalBtrX += formalBtrSizeX + padding;
-			}
-		}
-
-		if (m_curBattery != nullptr)
-		{
-			Vec2 mousePos = GET_MOUSEPOS;
-			RECT_RENDER(_hdc, mousePos.x, mousePos.y, btrSize.x, btrSize.y);
-		}
 	}
 }
 
@@ -134,52 +89,46 @@ void InventoryManager::Hide()
 	m_activeSelf = false;
 }
 
-void InventoryManager::TryInteract(Vec2 _mousePos)
+void InventoryManager::TryInteractToSeri(Vec2 _mousePos)
 {
 	POINT mousePos = { (long)_mousePos.x, (long)_mousePos.y };
-	if (m_curBattery != nullptr)
+
+	RECT addRt = m_addSeriBtn->GetRect();
+	RECT subRt = m_subSeriBtn->GetRect();
+	if (PtInRect(&addRt, mousePos))
 	{
-		for (int y = 0; y < 6; ++y)
-		for (int x = 0; x < 6; ++x)
-		{
-			if (m_batteryCells[x][y] == nullptr) continue;
-
-			cout << "에엥";
-
-			RECT rt = m_batteryCells[x][y]->GetRect();
-			POINT mousePos = { (long)_mousePos.x, (long)_mousePos.y };
-
-			if (PtInRect(&rt, mousePos))
-			{
-				cout << "그니까 이게되니까 지금 이러지";
-				m_curCell = { x,y };
-			}
-		}
+		if (m_seriCount >= 50) return;
+		m_batteryCount--;
+		m_seriCount++;
 	}
-	else
+
+	if (PtInRect(&subRt, mousePos))
 	{
-		for (int y = 0; y < 6; ++y)
-		for (int x = 0; x < 6; ++x)
-		{
-			if (m_batteryCells[x][y] == nullptr) continue;
-			RECT rt = m_batteryCells[x][y]->GetRect();
-			if (PtInRect(&rt, mousePos))
-			{
-				m_curBattery = m_batteryCells[x][y];
-			}
-		}
+		if (m_seriCount <= 1) return;
+		m_batteryCount++;
+		m_seriCount--;
+	}
+}
 
-		for (auto btr : m_vecBatteries)
-		{
-			if (btr == nullptr) continue;
+void InventoryManager::TryInteractToPara(Vec2 _mousePos)
+{
+	POINT mousePos = { (long)_mousePos.x, (long)_mousePos.y };
 
-			RECT rt = btr->GetRect();
-			if (PtInRect(&rt, mousePos))
-			{
-				m_curBattery = btr;
-				m_vecBatteries.pop_back();
-			}
-		}
+	RECT addRt = m_addParaBtn->GetRect();
+	RECT subRt = m_subParaBtn->GetRect();
+
+	if (PtInRect(&addRt, mousePos))
+	{
+		if (m_paraCount >= 10) return;
+		m_batteryCount--;
+		m_paraCount++;
+	}
+
+	if (PtInRect(&subRt, mousePos))
+	{
+		if (m_paraCount <= 1) return;
+		m_batteryCount++;
+		m_paraCount--;
 	}
 }
 

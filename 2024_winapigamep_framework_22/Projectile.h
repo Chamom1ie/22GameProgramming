@@ -9,6 +9,7 @@ public:
 	void Update() override;
 	virtual void Render(HDC _hdc) override;
 public:
+	float GetDamage() { return m_damage; }
 	void SetAngle(float _f)
 	{
 		m_angle = _f;
@@ -22,7 +23,6 @@ public:
 	{
 		m_damage = _damage;
 	}
-	float GetDamage() { return m_damage; }
 public:
 	virtual void EnterCollision(Collider* _other) = 0;
 	virtual void StayCollision(Collider* _other) = 0;
