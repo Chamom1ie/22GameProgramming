@@ -5,9 +5,9 @@ class Projectile : public Object
 {
 public:
 	Projectile();
-	~Projectile();
+	virtual ~Projectile();
 	void Update() override;
-	void Render(HDC _hdc) override;
+	virtual void Render(HDC _hdc) override;
 public:
 	void SetAngle(float _f)
 	{
@@ -19,13 +19,12 @@ public:
 		m_vDir.Normalize();
 	}
 public:
-	virtual void EnterCollision(Collider* _other);
-	virtual void StayCollision(Collider* _other);
-	virtual void ExitCollision(Collider* _other);
+	virtual void EnterCollision(Collider* _other) = 0;
+	virtual void StayCollision(Collider* _other) = 0;
+	virtual void ExitCollision(Collider* _other) = 0;
 private:
 	//float m_dir;
 	float m_angle;
 	Vec2 m_vDir;
-	Texture* m_pTex;
 };
 

@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Projectile.h"
+#include "PlayerBullet.h"
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Texture.h"
@@ -98,7 +98,7 @@ void Player::ToggleInventory()
 
 void Player::CreateProjectile()
 {
-	Projectile* pProj = new Projectile;
+	PlayerBullet* pProj = new PlayerBullet;
 	Vec2 vPos = GetPos();
 	Vec2 mousePos = GET_MOUSEPOS;
 
