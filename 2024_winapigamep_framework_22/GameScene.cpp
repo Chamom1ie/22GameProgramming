@@ -14,7 +14,7 @@ void GameScene::Init()
 	{
 		Object* pPlayer = new Player;
 		pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
-		pPlayer->SetSize({ 100.f, 100.f });
+		pPlayer->SetSize({ 25.f, 25.f });
 		AddObject(pPlayer, LAYER::PLAYER);
 	}
 	{
