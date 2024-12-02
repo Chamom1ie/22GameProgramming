@@ -68,7 +68,7 @@ void Player::Update()
 	float clampedY = std::clamp(vPos.y, minPos.y + GetSize().y / 2, maxPos.y - GetSize().y / 2);
 
 	Vec2 realPos = { clampedX, clampedY };
-	SetPos(realPos);
+
 }
 
 void Player::Render(HDC _hdc)

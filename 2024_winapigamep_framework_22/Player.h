@@ -16,5 +16,6 @@ private:
 	float m_atkCooldown = 0.2f;
 	float timer = 0;
 	bool _enable = true;
+	float m_health = 30;
 };
 
