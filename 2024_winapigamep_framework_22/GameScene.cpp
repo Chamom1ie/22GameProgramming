@@ -23,6 +23,7 @@ void GameScene::Init()
 		map->SetSize({ SCREEN_WIDTH, SCREEN_WIDTH });
 		AddObject(map, LAYER::BACKGROUND);
 	}
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	GET_SINGLE(WaveManager)->Init();

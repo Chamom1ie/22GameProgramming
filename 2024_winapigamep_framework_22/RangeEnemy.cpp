@@ -4,6 +4,9 @@
 #include "AStarPathFinder.h"
 #include "TimeManager.h"
 #include "WaveManager.h"
+#include "EnemyBullet.h"
+#include "SceneManager.h"
+#include "Scene.h"
 #include "GDISelector.h"
 
 RangeEnemy::RangeEnemy()
@@ -41,6 +44,7 @@ void RangeEnemy::UpdateState()
 {
 	AStarPathFinder* pathFinder = GetComponent<AStarPathFinder>();
 	Vec2 targetPos = m_target->GetPos();
+	Vec2 dir = (targetPos - m_vPos).Normalize();
 	float dis = (targetPos - m_vPos).Length();
 	switch (m_state)
 	{
@@ -60,7 +64,11 @@ void RangeEnemy::UpdateState()
 		if (m_atkTimer > m_stat.atkCooldown)
 		{
 			m_atkTimer = 0;
-			m_target->ApplyDamage(m_stat.atkDamage);
+			EnemyBullet* proj = new EnemyBullet;
+			proj->SetDamage(m_stat.atkDamage);
+			proj->SetDir(dir);
+			proj->SetName(L"EnemyBullet");
+			GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(proj, LAYER::PROJECTILE);
 		}
 		if (dis > m_stat.atkRange)
 			m_state = EnemyState::Chase;
