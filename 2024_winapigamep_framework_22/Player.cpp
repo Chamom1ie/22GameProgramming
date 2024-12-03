@@ -14,6 +14,8 @@
 Player::Player()
 	: m_pTex(nullptr)
 {
+	m_stat.hp = m_health;
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\Player.bmp");
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\planem.bmp";
@@ -68,7 +70,7 @@ void Player::Update()
 	float clampedY = std::clamp(vPos.y, minPos.y + GetSize().y / 2, maxPos.y - GetSize().y / 2);
 
 	Vec2 realPos = { clampedX, clampedY };
-	SetPos(realPos);
+
 }
 
 void Player::Render(HDC _hdc)
@@ -77,8 +79,8 @@ void Player::Render(HDC _hdc)
 	Vec2 vSize = GetSize();
 	RECT_RENDER(_hdc, vPos.x, vPos.y
 		, vSize.x, vSize.y);
-	/*int width = m_pTex->GetWidth();
-	int height = m_pTex->GetHeight();*/
+	int width = m_pTex->GetWidth();
+	int height = m_pTex->GetHeight();
 	//::BitBlt(_hdc
 	//	, (int)(vPos.x - vSize.x / 2)
 	//	, (int)(vPos.y - vSize.y / 2)
@@ -86,12 +88,12 @@ void Player::Render(HDC _hdc)
 	//	m_pTex->GetTexDC()
 	//	,0,0,SRCCOPY
 	//);
-	/*::TransparentBlt(_hdc
+	::TransparentBlt(_hdc
 		, (int)(vPos.x - width / 2)
 		, (int)(vPos.y - height / 2)
 		, width, height,
 		m_pTex->GetTexDC()
-		, 0, 0,width, height, RGB(255,0,255));*/
+		, 0, 0,width, height, RGB(255,0,255));
 	ComponentRender(_hdc);
 	//::StretchBlt();
 	//::AlphaBlend();
