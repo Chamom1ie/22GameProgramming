@@ -52,6 +52,8 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::S))
 		dir.y = 1;
 
+	cout << dir.x << dir.y << endl;
+
 	if (timer >= m_atkCooldown && GET_KEY(KEY_TYPE::LBUTTON))
 	{
 		timer = 0;
@@ -70,15 +72,13 @@ void Player::Update()
 	float clampedY = std::clamp(vPos.y, minPos.y + GetSize().y / 2, maxPos.y - GetSize().y / 2);
 
 	Vec2 realPos = { clampedX, clampedY };
-
+	m_vPos = realPos;
 }
 
 void Player::Render(HDC _hdc)
 {
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	RECT_RENDER(_hdc, vPos.x, vPos.y
-		, vSize.x, vSize.y);
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	//::BitBlt(_hdc
