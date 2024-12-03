@@ -35,6 +35,6 @@ enum class ENEMY_TYPE
 {
 	MELEE,
 	RANGE,
-	TANK,
+	DASH,
 	END
 };

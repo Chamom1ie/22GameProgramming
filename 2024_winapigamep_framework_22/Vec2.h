@@ -17,6 +17,10 @@ public:
 	{
 		return Vec2(x - _vOther.x, y - _vOther.y);
 	}
+	Vec2 operator - ()
+	{
+		return Vec2(-x, -y);
+	}
 	Vec2 operator * (const Vec2& _vOther)
 	{
 		return Vec2(x * _vOther.x, y * _vOther.y);
@@ -24,6 +28,10 @@ public:
 	Vec2 operator * (float _val)
 	{
 		return Vec2(x * _val, y * _val);
+	}
+	Vec2 operator / (float _val)
+	{
+		return Vec2(x / _val, y / _val);
 	}
 	Vec2 operator / (const Vec2& _vOther)
 	{

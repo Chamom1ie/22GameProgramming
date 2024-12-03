@@ -4,12 +4,14 @@
 enum class EnemyState
 {
 	Chase,
+	CanAttack,
 	Attack
 };
 
+class Texture;
 class AStarPathFinder;
 class Enemy :
-    public Object
+	public Object
 {
 public:
 	Enemy();
@@ -28,5 +30,6 @@ protected:
 	Object* m_target;
 	float m_atkTimer = 0;
 	EnemyState m_state;
+	Texture* m_pTex;
 };
 

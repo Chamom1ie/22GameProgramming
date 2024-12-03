@@ -142,6 +142,17 @@
     <ClInclude Include="Button.h">
       <Filter>Engine\KJH</Filter>
     </ClInclude>
+    <ClInclude Include="AStarGrid.h" />
+    <ClInclude Include="AStarMap.h" />
+    <ClInclude Include="AStarNode.h" />
+    <ClInclude Include="AStarPathFinder.h" />
+    <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MeleeEnemy.h" />
+    <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="RangeEnemy.h" />
+    <ClInclude Include="WaveManager.h" />
+    <ClInclude Include="DashEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -238,5 +249,19 @@
     <ClCompile Include="Button.cpp">
       <Filter>Engine\KJH</Filter>
     </ClCompile>
+    <ClCompile Include="AStarGrid.cpp" />
+    <ClCompile Include="AStarMap.cpp" />
+    <ClCompile Include="AStarNode.cpp" />
+    <ClCompile Include="AStarPathFinder.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="RangeEnemy.cpp" />
+    <ClCompile Include="WaveManager.cpp" />
+    <ClCompile Include="DashEnemy.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ struct Stat
 	float moveSpeed;
 	float atkRange;
 	float atkCooldown;
+	float atkDelay;
 	int atkDamage;
 };
 
