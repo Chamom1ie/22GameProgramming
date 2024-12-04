@@ -173,7 +173,6 @@
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Battery.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Circuit.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
@@ -219,7 +218,6 @@
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Battery.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Circuit.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />

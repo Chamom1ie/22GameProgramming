@@ -133,9 +133,6 @@
     <ClInclude Include="Battery.h">
       <Filter>Engine\KJH</Filter>
     </ClInclude>
-    <ClInclude Include="Circuit.h">
-      <Filter>Engine\KJH</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryManager.h">
       <Filter>Engine\KJH</Filter>
     </ClInclude>
@@ -238,9 +235,6 @@
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="Battery.cpp">
-      <Filter>Engine\KJH</Filter>
-    </ClCompile>
-    <ClCompile Include="Circuit.cpp">
       <Filter>Engine\KJH</Filter>
     </ClCompile>
     <ClCompile Include="InventoryManager.cpp">
