@@ -29,7 +29,7 @@ void WaveManager::Init()
         m_enemyTable[(int)ENEMY_TYPE::DASH].push(enemy);
     }
 
-    m_waves[1] = { 3, { /*ENEMY_TYPE::MELEE, ENEMY_TYPE::RANGE, */ENEMY_TYPE::DASH}, 1};
+    m_waves[1] = { 1, { /*ENEMY_TYPE::MELEE, ENEMY_TYPE::RANGE, */ENEMY_TYPE::DASH}, 1};
 
     m_player = GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::PLAYER)[0];
     Object* obj = GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::BACKGROUND)[0];

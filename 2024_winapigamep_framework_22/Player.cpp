@@ -52,8 +52,6 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::S))
 		dir.y = 1;
 
-	cout << dir.x << dir.y << endl;
-
 	if (timer >= m_atkCooldown && GET_KEY(KEY_TYPE::LBUTTON))
 	{
 		timer = 0;
