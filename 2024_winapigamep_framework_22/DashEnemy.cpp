@@ -23,10 +23,18 @@ DashEnemy::DashEnemy()
 	this->AddComponent<Collider>();
 	this->GetComponent<Collider>()->SetSize(m_vSize);
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"DashEnemy", L"Texture\\X-Slide.bmp");
+
+	int width = m_pTex->GetWidth();
+	int height = m_pTex->GetHeight();
+	m_enemyDC = CreateCompatibleDC(m_pTex->GetTexDC());
+	m_enemyBmap = CreateCompatibleBitmap(m_enemyDC, width, height);
+	::SelectObject(m_enemyDC, m_enemyBmap);
 }
 
 DashEnemy::~DashEnemy()
 {
+	DeleteObject(m_enemyBmap);
+	DeleteDC(m_enemyDC);
 }
 
 void DashEnemy::Update()
@@ -40,9 +48,12 @@ void DashEnemy::Render(HDC _hdc)
 	int height = m_pTex->GetHeight();
 	int halfWidth = width / 2;
 	int halfHeight = height / 2;
-	m_enemyDC = CreateCompatibleDC(m_pTex->GetTexDC());
-	m_enemyBmap = CreateCompatibleBitmap(m_enemyDC, width, height);
-	::SelectObject(m_enemyDC, m_enemyBmap);
+	//::PatBlt(m_enemyDC, 0, 0, width, height, WHITENESS);
+	::BitBlt(m_enemyDC, 0, 0, width, height, _hdc, m_vPos.x, m_vPos.y, SRCCOPY);
+	::TransparentBlt(m_enemyDC
+		, 0, 0, width, height
+		, m_pTex->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 
 	m_rad += fDT * PI;
 	POINT points[3];
@@ -52,17 +63,8 @@ void DashEnemy::Render(HDC _hdc)
 	points[1].y = m_vPos.y + (int)(halfWidth * sin(m_rad) + -halfHeight * cos(m_rad));
 	points[2].x = m_vPos.x + (int)(-halfWidth * cos(m_rad) - halfHeight * sin(m_rad));
 	points[2].y = m_vPos.y + (int)(-halfWidth * sin(m_rad) + halfHeight * cos(m_rad));
-	::PlgBlt(_hdc, points, m_pTex->GetTexDC(), 0, 0, width, height, nullptr, 0, 0);
-
-	::TransparentBlt(_hdc
-		, (int)(m_vPos.x - halfWidth)
-		, (int)(m_vPos.y - halfHeight)
-		, width, height
-		, m_pTex->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
-
-	DeleteObject(m_enemyBmap);
-	DeleteDC(m_enemyDC);
+	::PlgBlt(_hdc, points, m_enemyDC
+		, 0, 0, width, height, nullptr, 0, 0);
 }
 
 void DashEnemy::UpdateState()
@@ -75,9 +77,14 @@ void DashEnemy::UpdateState()
 	{
 	case EnemyState::Chase:
 	{
-		pathFinder->SetDestination(targetPos);
-		if (dis <= m_stat.atkRange)
+		if (dis > m_stat.atkRange)
 		{
+			cout << "Chase" << endl;
+			pathFinder->SetDestination(targetPos);
+		}
+		else
+		{
+			cout << "Chase to Atk" << endl;
 			pathFinder->Stop();
 			m_state = EnemyState::CanAttack;
 		}
@@ -85,6 +92,7 @@ void DashEnemy::UpdateState()
 	break;
 	case EnemyState::CanAttack:
 	{
+		cout << "CanAtk" << endl;
 		m_atkTimer += fDT;
 		if (m_atkTimer > m_stat.atkDelay)
 		{
@@ -92,15 +100,11 @@ void DashEnemy::UpdateState()
 			m_atkDir = dir;
 			m_state = EnemyState::Attack;
 		}
-		if (dis > m_stat.atkRange)
-		{
-			m_atkTimer = 0;
-			m_state = EnemyState::Chase;
-		}
 	}
 	break;
 	case EnemyState::Attack:
 	{
+		cout << "Atk" << endl;
 		m_atkTimer += fDT;
 		if (m_atkTimer < 0.6f)
 		{
@@ -113,7 +117,7 @@ void DashEnemy::UpdateState()
 		else
 		{
 			m_atkTimer = -1;
-			m_state = EnemyState::CanAttack;
+			m_state = EnemyState::Chase;
 		}
 	}
 	break;

@@ -26,10 +26,26 @@ void AStarPathFinder::Render(HDC _hdc)
 void AStarPathFinder::SetDestination(Vec2 _pos)
 {
 	AStarNode* node = m_aStarGrid->GetNodeFromPosition(_pos);
-	if (node == m_targetNode) return;
+	if (node == nullptr)
+	{
+		cout << "리턴1" << endl;
+		return;
+	}
+	if (m_targetNode == nullptr)
+	{
+		m_targetNode = node;
+		return;
+	}
+	else if (*node == *m_targetNode && m_path.size() > 0)
+	{
+		m_isStopped = false;
+		cout << "리턴" << endl;
+		return;
+	}
 
 	m_targetPos = _pos;
 	m_targetNode = node;
 	m_path = m_aStarGrid->GetPath(m_owner->GetPos(), m_targetPos);
+	cout << m_path.size() << endl;
 	Start();
 }
