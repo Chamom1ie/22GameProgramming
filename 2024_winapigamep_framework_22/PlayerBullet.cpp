@@ -11,7 +11,7 @@ PlayerBullet::PlayerBullet()
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\Bullet.bmp";
 	//m_pTex->Load(path);
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Bullet", L"Texture\\Bullet.bmp");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"PlayerBullet", L"Texture\\PlayerBullet.bmp");
 }
 
 PlayerBullet::~PlayerBullet()

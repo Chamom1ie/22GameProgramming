@@ -133,9 +133,6 @@
     <ClInclude Include="Battery.h">
       <Filter>Engine\KJH</Filter>
     </ClInclude>
-    <ClInclude Include="Circuit.h">
-      <Filter>Engine\KJH</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryManager.h">
       <Filter>Engine\KJH</Filter>
     </ClInclude>
@@ -153,6 +150,7 @@
     <ClInclude Include="RangeEnemy.h" />
     <ClInclude Include="WaveManager.h" />
     <ClInclude Include="DashEnemy.h" />
+    <ClInclude Include="BossEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -240,9 +238,6 @@
     <ClCompile Include="Battery.cpp">
       <Filter>Engine\KJH</Filter>
     </ClCompile>
-    <ClCompile Include="Circuit.cpp">
-      <Filter>Engine\KJH</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryManager.cpp">
       <Filter>Engine\KJH</Filter>
     </ClCompile>
@@ -260,6 +255,7 @@
     <ClCompile Include="RangeEnemy.cpp" />
     <ClCompile Include="WaveManager.cpp" />
     <ClCompile Include="DashEnemy.cpp" />
+    <ClCompile Include="BossEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
