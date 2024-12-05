@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+
 enum class BOSS_STATE
 {
 	START,
@@ -25,7 +26,20 @@ private:
 	HBITMAP m_enemyBmap;
 	int patternCounter = 0;
 	int m_bState = (int)BOSS_STATE::START;
-	Texture* m_StartTexs[4];
+	/*map<const int, ENEMY_TYPE[]> rollEnds = { 
+		{1,{ENEMY_TYPE::RANGE, ENEMY_TYPE::MELEE, ENEMY_TYPE::BOSS}}, 
+		{2,{ENEMY_TYPE::RANGE, ENEMY_TYPE::RANGE, ENEMY_TYPE::RANGE}} };*/
+
+	Texture* m_startTexs[4];
 	Texture* m_rollTexs[10];
-	Texture* m_endRollTexs[4];
+	Texture* m_endRollTexs[12];
+	Texture* m_bossDefaultTex;
+	int m_startTexLen = 3;
+	int m_rollTexLen = 9;
+	int m_endRollTexLen = 11;
+	float m_startAnimFrameRate = 0.35f;
+	float m_rollAnimFrameRate = 0.1f;
+
+	std::random_device m_rd;
+	std::mt19937 m_mt;
 };
