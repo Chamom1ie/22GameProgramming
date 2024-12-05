@@ -48,21 +48,22 @@ void DashEnemy::Render(HDC _hdc)
 	int height = m_pTex->GetHeight();
 	int halfWidth = width / 2;
 	int halfHeight = height / 2;
-	//::PatBlt(m_enemyDC, 0, 0, width, height, WHITENESS);
-	::BitBlt(m_enemyDC, 0, 0, width, height, _hdc, m_vPos.x, m_vPos.y, SRCCOPY);
+	::BitBlt(m_enemyDC, 0, 0, width, height, _hdc
+		, m_vPos.x - halfWidth, m_vPos.y - halfHeight, SRCCOPY);
 	::TransparentBlt(m_enemyDC
 		, 0, 0, width, height
 		, m_pTex->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
 
-	m_rad += fDT * PI;
 	POINT points[3];
-	points[0].x = m_vPos.x + (int)(-halfWidth * cos(m_rad) - -halfHeight * sin(m_rad));
-	points[0].y = m_vPos.y + (int)(-halfWidth * sin(m_rad) + -halfHeight * cos(m_rad));
-	points[1].x = m_vPos.x + (int)(halfWidth * cos(m_rad) - -halfHeight * sin(m_rad));
-	points[1].y = m_vPos.y + (int)(halfWidth * sin(m_rad) + -halfHeight * cos(m_rad));
-	points[2].x = m_vPos.x + (int)(-halfWidth * cos(m_rad) - halfHeight * sin(m_rad));
-	points[2].y = m_vPos.y + (int)(-halfWidth * sin(m_rad) + halfHeight * cos(m_rad));
+	float cos = cosf(m_rad);
+	float sin = sinf(m_rad);
+	points[0].x = m_vPos.x + (int)(-halfWidth * cos + halfHeight * sin);
+	points[0].y = m_vPos.y + (int)(-halfWidth * sin - halfHeight * cos);
+	points[1].x = m_vPos.x + (int)(halfWidth * cos + halfHeight * sin);
+	points[1].y = m_vPos.y + (int)(halfWidth * sin - halfHeight * cos);
+	points[2].x = m_vPos.x + (int)(-halfWidth * cos - halfHeight * sin);
+	points[2].y = m_vPos.y + (int)(-halfWidth * sin + halfHeight * cos);
 	::PlgBlt(_hdc, points, m_enemyDC
 		, 0, 0, width, height, nullptr, 0, 0);
 }
@@ -79,12 +80,10 @@ void DashEnemy::UpdateState()
 	{
 		if (dis > m_stat.atkRange)
 		{
-			cout << "Chase" << endl;
 			pathFinder->SetDestination(targetPos);
 		}
 		else
 		{
-			cout << "Chase to Atk" << endl;
 			pathFinder->Stop();
 			m_state = EnemyState::CanAttack;
 		}
@@ -92,7 +91,6 @@ void DashEnemy::UpdateState()
 	break;
 	case EnemyState::CanAttack:
 	{
-		cout << "CanAtk" << endl;
 		m_atkTimer += fDT;
 		if (m_atkTimer > m_stat.atkDelay)
 		{
@@ -104,7 +102,7 @@ void DashEnemy::UpdateState()
 	break;
 	case EnemyState::Attack:
 	{
-		cout << "Atk" << endl;
+		m_rad += fDT * PI;
 		m_atkTimer += fDT;
 		if (m_atkTimer < 0.6f)
 		{
