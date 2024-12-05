@@ -18,4 +18,3 @@ private:
 	bool _enable = true;
 	float m_health = 30;
 };
-

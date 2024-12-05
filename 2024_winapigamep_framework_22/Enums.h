@@ -36,5 +36,6 @@ enum class ENEMY_TYPE
 	MELEE,
 	RANGE,
 	DASH,
+	BOSS,
 	END
 };
