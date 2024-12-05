@@ -8,21 +8,32 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "WaveManager.h"
+#include "Texture.h"
+
 void TitleScene::Init()
 {
-	Object* pPlayer = new Player;
-	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
-	pPlayer->SetSize({ 100.f,100.f });
-	AddObject(pPlayer, LAYER::PLAYER);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
-	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
-	//GET_SINGLE(ResourceManager)->Play(L"BGM");
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Gambling", L"Texture\\gambling.bmp");
+	int texWidth = m_pTex->GetWidth();
+	int texHeight = m_pTex->GetHeight();
+
+	m_width = SCREEN_WIDTH / 4;
+	m_height = SCREEN_HEIGHT / 7;
 }
 
 void TitleScene::Update()
 {
 	Scene::Update();
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
+	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
+}
+
+void TitleScene::Render(HDC _hdc)
+{
+	for (int row = 0; row < SCREEN_WIDTH; row += m_width)
+	for (int col = 0; col < SCREEN_HEIGHT; col += m_height)
+	{
+		::StretchBlt(_hdc, row, col, m_width, m_height
+			, m_pTex->GetTexDC()
+			, 0, 0, m_pTex->GetWidth(), m_pTex->GetHeight(), SRCCOPY);
+	}
 }
