@@ -21,6 +21,7 @@ public:
 	void Push(ENEMY_TYPE type, Enemy* enemy) { m_enemyTable[(int)type].push(enemy); }
 private:
 	void SpawnWave();
+	void SpawnEnemy(ENEMY_TYPE types[]);
 private:
 	Wave m_waves[25];
 	int m_currentWave = 1;
