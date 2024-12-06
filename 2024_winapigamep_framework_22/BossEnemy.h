@@ -33,7 +33,7 @@ private:
 	#pragma region 보스 정보
 	int m_forceJackpotCnt = 0;
 	int patternIdx;
-	int m_jackPotIdx;
+	int m_rollIdx;
 	int m_bState = (int)BOSS_STATE::START;
 	ENEMY_TYPE texByEnemies[12][3]{
 		{ENEMY_TYPE::Orage, ENEMY_TYPE::XSlide, ENEMY_TYPE::Tradian},
