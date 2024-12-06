@@ -178,7 +178,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
-    <ClInclude Include="DashEnemy.h" />
+    <ClInclude Include="XSlideEnemy.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBullet.h" />
@@ -196,7 +196,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Projectile.h" />
-    <ClInclude Include="RangeEnemy.h" />
+    <ClInclude Include="ElevenEnemy.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -224,7 +224,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="DashEnemy.cpp" />
+    <ClCompile Include="XSlideEnemy.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="EventManager.cpp" />
@@ -239,7 +239,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="RangeEnemy.cpp" />
+    <ClCompile Include="ElevenEnemy.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />

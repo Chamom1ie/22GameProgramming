@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "DashEnemy.h"
+#include "XSlideEnemy.h"
 #include "Collider.h"
 #include "AStarPathFinder.h"
 #include "TimeManager.h"
@@ -11,7 +11,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 
-DashEnemy::DashEnemy()
+XSlideEnemy::XSlideEnemy()
 {
 	m_stat.hp = 3;
 	m_stat.moveSpeed = 75.f;
@@ -31,18 +31,18 @@ DashEnemy::DashEnemy()
 	::SelectObject(m_enemyDC, m_enemyBmap);
 }
 
-DashEnemy::~DashEnemy()
+XSlideEnemy::~XSlideEnemy()
 {
 	DeleteObject(m_enemyBmap);
 	DeleteDC(m_enemyDC);
 }
 
-void DashEnemy::Update()
+void XSlideEnemy::Update()
 {
 	UpdateState();
 }
 
-void DashEnemy::Render(HDC _hdc)
+void XSlideEnemy::Render(HDC _hdc)
 {
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
@@ -68,7 +68,7 @@ void DashEnemy::Render(HDC _hdc)
 		, 0, 0, width, height, nullptr, 0, 0);
 }
 
-void DashEnemy::UpdateState()
+void XSlideEnemy::UpdateState()
 {
 	AStarPathFinder* pathFinder = GetComponent<AStarPathFinder>();
 	Vec2 targetPos = m_target->GetPos();

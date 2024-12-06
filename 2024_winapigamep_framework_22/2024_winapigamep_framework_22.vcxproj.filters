@@ -147,9 +147,9 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="MeleeEnemy.h" />
     <ClInclude Include="PlayerBullet.h" />
-    <ClInclude Include="RangeEnemy.h" />
+    <ClInclude Include="ElevenEnemy.h" />
     <ClInclude Include="WaveManager.h" />
-    <ClInclude Include="DashEnemy.h" />
+    <ClInclude Include="XSlideEnemy.h" />
     <ClInclude Include="BossEnemy.h" />
   </ItemGroup>
   <ItemGroup>
@@ -252,9 +252,9 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
-    <ClCompile Include="RangeEnemy.cpp" />
+    <ClCompile Include="ElevenEnemy.cpp" />
     <ClCompile Include="WaveManager.cpp" />
-    <ClCompile Include="DashEnemy.cpp" />
+    <ClCompile Include="XSlideEnemy.cpp" />
     <ClCompile Include="BossEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>

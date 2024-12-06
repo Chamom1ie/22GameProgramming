@@ -33,9 +33,11 @@ enum class EVENT_TYPE
 
 enum class ENEMY_TYPE
 {
-	MELEE,
-	RANGE,
-	DASH,
+	Tradian,
+	Eleven,
+	XSlide,
+	Orage,
+	Doll,
 	BOSS,
 	END
 };

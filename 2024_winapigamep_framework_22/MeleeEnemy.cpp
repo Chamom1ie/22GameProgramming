@@ -20,7 +20,7 @@ MeleeEnemy::MeleeEnemy()
 
 MeleeEnemy::~MeleeEnemy()
 {
-	GET_SINGLE(WaveManager)->Push(ENEMY_TYPE::MELEE, new MeleeEnemy);
+	GET_SINGLE(WaveManager)->Push(ENEMY_TYPE::Tradian, new MeleeEnemy);
 }
 
 void MeleeEnemy::Update()

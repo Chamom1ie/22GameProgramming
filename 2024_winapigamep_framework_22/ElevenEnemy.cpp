@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "RangeEnemy.h"
+#include "ElevenEnemy.h"
 #include "Collider.h"
 #include "AStarPathFinder.h"
 #include "TimeManager.h"
@@ -11,7 +11,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 
-RangeEnemy::RangeEnemy()
+ElevenEnemy::ElevenEnemy()
 {
 	m_stat.hp = 3;
 	m_stat.moveSpeed = 75.f;
@@ -25,16 +25,16 @@ RangeEnemy::RangeEnemy()
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"RangeEnemy", L"Texture\\Eleven.bmp");
 }
 
-RangeEnemy::~RangeEnemy()
+ElevenEnemy::~ElevenEnemy()
 {
 }
 
-void RangeEnemy::Update()
+void ElevenEnemy::Update()
 {
 	UpdateState();
 }
 
-void RangeEnemy::Render(HDC _hdc)
+void ElevenEnemy::Render(HDC _hdc)
 {
 	HPEN newPen = CreatePen(PS_INSIDEFRAME, 2, RGB(255, 50, 50));
 	HPEN oldPen = (HPEN)SelectObject(_hdc, newPen);
@@ -55,7 +55,7 @@ void RangeEnemy::Render(HDC _hdc)
 		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
-void RangeEnemy::UpdateState()
+void ElevenEnemy::UpdateState()
 {
 	AStarPathFinder* pathFinder = GetComponent<AStarPathFinder>();
 	Vec2 targetPos = m_target->GetPos();
