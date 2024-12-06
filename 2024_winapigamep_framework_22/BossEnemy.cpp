@@ -126,7 +126,7 @@ void BossEnemy::Update()
 					std::uniform_int_distribution<int> typeIdx(0, m_endRollTexLen);
 					int idx = typeIdx(m_mt);
 					cout << idx << µÎÀÌ;
-					m_jackPotIdx = idx;
+					m_rollIdx = idx;
 					m_pTex = m_endRollTexs[idx];
 					curAnim = 0;
 					bossBehaviorTimer = 0;
