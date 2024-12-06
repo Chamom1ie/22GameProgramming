@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "WaveManager.h"
 #include "MeleeEnemy.h"
-#include "RangeEnemy.h"
-#include "DashEnemy.h"
+#include "ElevenEnemy.h"
+#include "XSlideEnemy.h"
 #include "BossEnemy.h"
 #include "TimeManager.h"
 #include "SceneManager.h"
@@ -17,17 +17,17 @@ void WaveManager::Init()
     for (int i = 0; i < 10; i++)
     {
         Enemy* enemy = new MeleeEnemy;
-        m_enemyTable[(int)ENEMY_TYPE::MELEE].push(enemy);
+        m_enemyTable[(int)ENEMY_TYPE::Tradian].push(enemy);
     }
     for (int i = 0; i < 10; i++)
     {
-        Enemy* enemy = new RangeEnemy;
-        m_enemyTable[(int)ENEMY_TYPE::RANGE].push(enemy);
+        Enemy* enemy = new ElevenEnemy;
+        m_enemyTable[(int)ENEMY_TYPE::Eleven].push(enemy);
     }
     for (int i = 0; i < 10; i++)
     {
-        Enemy* enemy = new DashEnemy;
-        m_enemyTable[(int)ENEMY_TYPE::DASH].push(enemy);
+        Enemy* enemy = new XSlideEnemy;
+        m_enemyTable[(int)ENEMY_TYPE::XSlide].push(enemy);
     }
     {
         Enemy* enemy = new BossEnemy;
