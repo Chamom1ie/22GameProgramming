@@ -87,3 +87,39 @@ void WaveManager::SpawnWave()
         m_remainEnemyCnt++;
     }
 }
+
+void WaveManager::SpawnEnemy(ENEMY_TYPE types[])
+{
+    for (int i = 0; i < 3; i++)
+    {
+        Enemy* enemy;
+        switch (types[i])
+        {
+        /*case ENEMY_TYPE::
+            enemy = new ;
+            break;
+        case ENEMY_TYPE::
+            enemy = new ;
+            break;
+        case ENEMY_TYPE::
+            enemy = new ;
+            break;
+        case ENEMY_TYPE::
+            enemy = new ;
+            break;
+        case ENEMY_TYPE::
+            enemy = new ;
+            break;
+        default:
+            cout << "³Í ¹¹¾ß" << µÎÀÌ;
+            break;
+        */}
+        enemy->SetPos({ 150 * m_remainEnemyCnt, 300 });
+        enemy->SetName(L"Enemy");
+        enemy->SetTarget(m_player);
+        enemy->AddComponent<AStarPathFinder>();
+        enemy->GetComponent<AStarPathFinder>()->SetAStarGrid(m_map->GetAStarGrid());
+
+        GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(enemy, LAYER::ENEMY);
+    }
+}

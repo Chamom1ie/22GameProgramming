@@ -27,19 +27,29 @@ BossEnemy::BossEnemy()
 	for (int i = 0; i < 4; i++)
 	{
 		wstring path = std::format(L"Texture\\boss{0}.bmp", i);
-		m_startTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(L"BossEnemy", path);
+		wstring key = std::format(L"BossEnemyStart{0}", i);
+		m_startTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(key, path);
 	}
 
 	for (int i = 0; i < 10; i++)
 	{
 		wstring path = std::format(L"Texture\\roll{0}.bmp", i);
-		m_rollTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(L"BossEnemy", path);
+		wstring key = std::format(L"BossEnemyRoll{0}", i);
+		m_rollTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(key, path);
 	}
 
 	for (int i = 0; i < 12; i++)
 	{
 		wstring path = std::format(L"Texture\\endroll{0}.bmp", i);
-		m_endRollTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(L"BossEnemy", path);
+		wstring key = std::format(L"BossEnemyEndRoll{0}", i);
+		m_endRollTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(key, path);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		wstring path = std::format(L"Texture\\jackpot{0}.bmp", i);
+		wstring key = std::format(L"BossEnemyJackpot{0}", i);
+		m_jackpotTexs[i] = GET_SINGLE(ResourceManager)->TextureLoad(key, path);
 	}
 
 	m_pTex = m_startTexs[0];
@@ -60,22 +70,18 @@ BossEnemy::~BossEnemy()
 
 void BossEnemy::Update()
 {
-}
-
-void BossEnemy::Render(HDC _hdc)
-{
 	static int curAnim = 0;
 	static float bossBehaviorTimer = 0;
 	bossBehaviorTimer += fDT;
+
 	if (m_bState == (int)BOSS_STATE::START)
 	{
-		curAnim = 0;
 		if (bossBehaviorTimer >= m_startAnimFrameRate)
 		{
 			bossBehaviorTimer = 0;
 			curAnim++;
 			m_pTex = m_startTexs[curAnim];
-			if (curAnim >= m_startTexLen && bossBehaviorTimer >= m_startAnimFrameRate)
+			if (curAnim >= m_startTexLen)
 			{
 				m_bState = (int)BOSS_STATE::WAIT;
 
@@ -103,20 +109,45 @@ void BossEnemy::Render(HDC _hdc)
 			curAnim++;
 			m_pTex = m_rollTexs[curAnim];
 
-			if (curAnim >= m_rollTexLen && bossBehaviorTimer >= m_startAnimFrameRate)
+			if (curAnim >= m_rollTexLen)
 			{
-				m_bState = (int)BOSS_STATE::ATTACK;
-				std::uniform_int_distribution<int> typeIdx(0, m_endRollTexLen + 1 );
-				m_pTex = m_endRollTexs[typeIdx(m_mt)];
-				curAnim = 0;
-				bossBehaviorTimer = 0;
+				if (m_forceJackpotCnt >= 5)
+				{
+					std::uniform_int_distribution<int> typeIdx(0, m_jackpotTexLen);
+					m_forceJackpotCnt = 0;
+					int idx = typeIdx(m_mt) ;
+					m_pTex = m_jackpotTexs[idx];
+					m_bState = (int)BOSS_STATE(idx + ((int)BOSS_STATE::Jackpot_1 - 1));
+				}
+				else
+				{
+					m_forceJackpotCnt++;
+					m_bState = (int)BOSS_STATE::ATTACK;
+					std::uniform_int_distribution<int> typeIdx(0, m_endRollTexLen);
+					int idx = typeIdx(m_mt);
+					cout << idx << µÎÀÌ;
+					m_jackPotIdx = idx;
+					m_pTex = m_endRollTexs[idx];
+					curAnim = 0;
+					bossBehaviorTimer = 0;
+				}
 			}
 		}
 	}
 	else if (m_bState == (int)BOSS_STATE::ATTACK)
 	{
 
+		if (bossBehaviorTimer >= m_attackCooldown)
+		{
+			m_bState = (int)BOSS_STATE::WAIT;
+			bossBehaviorTimer = 0;
+			curAnim = 0;
+		}
 	}
+}
+
+void BossEnemy::Render(HDC _hdc)
+{
 
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();

@@ -28,3 +28,5 @@ public:							\
 #define PI 3.14159265
 #define RAD2DEG(radian) ((radian) * 180 / PI)
 #define DEG2RAD(degree) ((degree) * PI / 180)
+
+#define µŒ¿Ã endl;

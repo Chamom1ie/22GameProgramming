@@ -7,6 +7,11 @@ enum class BOSS_STATE
 	WAIT,
 	ROLL,
 	ATTACK,
+	Jackpot_1,
+	Jackpot_2,
+	Jackpot_3,
+	Jackpot_4,
+	Jackpot_5,
 	END = 10
 };
 class BossEnemy :
@@ -24,21 +29,44 @@ private:
 	float m_rad = 0.f;
 	HDC m_enemyDC;
 	HBITMAP m_enemyBmap;
-	int patternCounter = 0;
-	int m_bState = (int)BOSS_STATE::START;
-	/*map<const int, ENEMY_TYPE[]> rollEnds = { 
-		{1,{ENEMY_TYPE::RANGE, ENEMY_TYPE::MELEE, ENEMY_TYPE::BOSS}}, 
-		{2,{ENEMY_TYPE::RANGE, ENEMY_TYPE::RANGE, ENEMY_TYPE::RANGE}} };*/
 
+	#pragma region 보스 정보
+	int m_forceJackpotCnt = 0;
+	int patternIdx;
+	int m_jackPotIdx;
+	int m_bState = (int)BOSS_STATE::START;
+	//ENEMY_TYPE texByEnemies[12][3]{
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//	{ENEMY_TYPE::BOSS, ENEMY_TYPE::DASH, ENEMY_TYPE::RANGE},
+	//};
+	#pragma endregion
+
+
+	#pragma region 짭 애니메이터
 	Texture* m_startTexs[4];
 	Texture* m_rollTexs[10];
 	Texture* m_endRollTexs[12];
+	Texture* m_jackpotTexs[5];
 	Texture* m_bossDefaultTex;
+
 	int m_startTexLen = 3;
 	int m_rollTexLen = 9;
 	int m_endRollTexLen = 11;
-	float m_startAnimFrameRate = 0.35f;
-	float m_rollAnimFrameRate = 0.1f;
+	int m_jackpotTexLen = 4;
+	float m_startAnimFrameRate = 0.65f;
+	float m_rollAnimFrameRate = 0.08f;
+	float m_attackCooldown= 0.5f;
+	#pragma endregion
 
 	std::random_device m_rd;
 	std::mt19937 m_mt;
