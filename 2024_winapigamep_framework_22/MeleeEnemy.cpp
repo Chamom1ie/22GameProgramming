@@ -8,19 +8,13 @@
 
 MeleeEnemy::MeleeEnemy()
 {
-	m_stat.hp = 5;
-	m_stat.moveSpeed = 100.f;
-	m_stat.atkRange = 50.f;
-	m_stat.atkCooldown = 1.f;
-	m_stat.atkDamage = 5;
-	m_vSize = { 30, 30 };
 	this->AddComponent<Collider>();
 	this->GetComponent<Collider>()->SetSize(m_vSize);
 }
 
 MeleeEnemy::~MeleeEnemy()
 {
-	GET_SINGLE(WaveManager)->Push(ENEMY_TYPE::Tradian, new MeleeEnemy);
+	
 }
 
 void MeleeEnemy::Update()

@@ -3,6 +3,9 @@
 #include "MeleeEnemy.h"
 #include "ElevenEnemy.h"
 #include "XSlideEnemy.h"
+#include "DollEnemy.h"
+#include "TradianEnemy.h"
+#include "OrageEnemy.h"
 #include "BossEnemy.h"
 #include "TimeManager.h"
 #include "SceneManager.h"
@@ -28,6 +31,16 @@ void WaveManager::Init()
     {
         Enemy* enemy = new XSlideEnemy;
         m_enemyTable[(int)ENEMY_TYPE::XSlide].push(enemy);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        Enemy* enemy = new TradianEnemy;
+        m_enemyTable[(int)ENEMY_TYPE::Tradian].push(enemy);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        Enemy* enemy = new DollEnemy;
+        m_enemyTable[(int)ENEMY_TYPE::Doll].push(enemy);
     }
     {
         Enemy* enemy = new BossEnemy;
@@ -88,32 +101,32 @@ void WaveManager::SpawnWave()
     }
 }
 
-void WaveManager::SpawnEnemy(ENEMY_TYPE types[])
+void WaveManager::SpawnEnemy(ENEMY_TYPE types[], int cnt)
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < cnt; i++)
     {
         Enemy* enemy;
         switch (types[i])
         {
-        /*case ENEMY_TYPE::
-            enemy = new ;
+        case ENEMY_TYPE::Tradian:
+            enemy = new TradianEnemy;
             break;
-        case ENEMY_TYPE::
-            enemy = new ;
+        case ENEMY_TYPE::Eleven:
+            enemy = new ElevenEnemy;
             break;
-        case ENEMY_TYPE::
-            enemy = new ;
+        case ENEMY_TYPE::XSlide:
+            enemy = new XSlideEnemy;
             break;
-        case ENEMY_TYPE::
-            enemy = new ;
+        case ENEMY_TYPE::Doll:
+            enemy = new DollEnemy;
             break;
-        case ENEMY_TYPE::
-            enemy = new ;
+        case ENEMY_TYPE::Orage:
+            enemy = new OrageEnemy;
             break;
         default:
             cout << "³Í ¹¹¾ß" << µÎÀÌ;
             break;
-        */}
+        }
         enemy->SetPos({ 150 * m_remainEnemyCnt, 300 });
         enemy->SetName(L"Enemy");
         enemy->SetTarget(m_player);
@@ -122,4 +135,10 @@ void WaveManager::SpawnEnemy(ENEMY_TYPE types[])
 
         GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(enemy, LAYER::ENEMY);
     }
+}
+
+Vec2 WaveManager::GetRandomPosition()
+{
+    std::uniform_real_distribution<float> rdValue(-1, 1);
+    bool sign = std::signbit(rdValue(m_mt));
 }

@@ -6,8 +6,8 @@ public:
 	MeleeEnemy();
 	virtual ~MeleeEnemy();
 public:
-	void Update() override;
-	void Render(HDC _hdc) override;
+	virtual void Update() override;
+	virtual void Render(HDC _hdc) override;
 private:
 	void UpdateState();
 };
