@@ -37,6 +37,11 @@ void WaveManager::Init()
         Enemy* enemy = new DollEnemy;
         m_enemyTable[(int)ENEMY_TYPE::Doll].push(enemy);
     }
+    for (int i = 0; i < 10; i++)
+    {
+        Enemy* enemy = new OrageEnemy;
+        m_enemyTable[(int)ENEMY_TYPE::Orage].push(enemy);
+    }
     {
         Enemy* enemy = new BossEnemy;
         m_enemyTable[(int)ENEMY_TYPE::BOSS].push(enemy);
@@ -139,7 +144,11 @@ void WaveManager::SpawnEnemy(ENEMY_TYPE types[], int cnt)
 
 Vec2 WaveManager::GetRandomPosition()
 {
-    std::uniform_real_distribution<float> rdValue(-1, 1);
-    bool sign = std::signbit(rdValue(m_mt));
+    std::uniform_int_distribution<int> rdValue(0, 1);
+
+    if (rdValue(m_mt))
+    {
+
+    }
     return { 0,0 };
 }

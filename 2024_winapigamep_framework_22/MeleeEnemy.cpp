@@ -5,16 +5,14 @@
 #include "WaveManager.h"
 #include "AStarPathFinder.h"
 #include "GDISelector.h"
+#include "Texture.h"
 
 MeleeEnemy::MeleeEnemy()
 {
-	this->AddComponent<Collider>();
-	this->GetComponent<Collider>()->SetSize(m_vSize);
 }
 
 MeleeEnemy::~MeleeEnemy()
 {
-	
 }
 
 void MeleeEnemy::Update()
@@ -24,12 +22,14 @@ void MeleeEnemy::Update()
 
 void MeleeEnemy::Render(HDC _hdc)
 {
-	HPEN newPen = CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
-	HPEN oldPen = (HPEN)SelectObject(_hdc, newPen);
-	GDISelector brush = { _hdc, BRUSH_TYPE::HOLLOW };
-	RECT_RENDER(_hdc, m_vPos.x, m_vPos.y, m_vSize.x, m_vSize.y);
-	DeleteObject(newPen);
-	SelectObject(_hdc, oldPen);
+	int width = m_pTex->GetWidth();
+	int height = m_pTex->GetHeight();
+	::TransparentBlt(_hdc
+		, (int)(m_vPos.x - width / 2)
+		, (int)(m_vPos.y - height / 2)
+		, width, height,
+		m_pTex->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 void MeleeEnemy::UpdateState()
