@@ -109,10 +109,10 @@ void Player::ToggleInventory()
 
 void Player::CreateProjectile()
 {
-	int paraCnt = GET_SINGLE(InventoryManager)->GetParaCount();
-	int seriCnt = GET_SINGLE(InventoryManager)->GetSeriCount();
-	int damage = seriCnt; //ceil((float)seriCnt / paraCnt);
-	for (int i = 1; i <= paraCnt; ++i)
+	int gageCnt = GET_SINGLE(InventoryManager)->GetGageCount();
+	int powerCnt = GET_SINGLE(InventoryManager)->GetPowerCount();
+	int damage = powerCnt; //ceil((float)seriCnt / paraCnt);
+	for (int i = 1; i <= gageCnt; ++i)
 	{
 		PlayerBullet* pProj = new PlayerBullet;
 		Vec2 vPos = GetPos();
@@ -122,7 +122,7 @@ void Player::CreateProjectile()
 		pProj->SetSize({30.f,30.f});
 
 		float betweenAngle = 5.f;
-		float projAngle = betweenAngle * (paraCnt - 1);
+		float projAngle = betweenAngle * (gageCnt - 1);
 
 		Vec2 dir = (mousePos - vPos);
 

@@ -130,9 +130,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Battery.h">
-      <Filter>Engine\KJH</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryManager.h">
       <Filter>Engine\KJH</Filter>
     </ClInclude>
@@ -151,6 +148,9 @@
     <ClInclude Include="WaveManager.h" />
     <ClInclude Include="XSlideEnemy.h" />
     <ClInclude Include="BossEnemy.h" />
+    <ClInclude Include="DollEnemy.h" />
+    <ClInclude Include="OrageEnemy.h" />
+    <ClInclude Include="TradianEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -235,9 +235,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Battery.cpp">
-      <Filter>Engine\KJH</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryManager.cpp">
       <Filter>Engine\KJH</Filter>
     </ClCompile>
@@ -256,8 +253,12 @@
     <ClCompile Include="WaveManager.cpp" />
     <ClCompile Include="XSlideEnemy.cpp" />
     <ClCompile Include="BossEnemy.cpp" />
+    <ClCompile Include="DollEnemy.cpp" />
+    <ClCompile Include="OrageEnemy.cpp" />
+    <ClCompile Include="TradianEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>
