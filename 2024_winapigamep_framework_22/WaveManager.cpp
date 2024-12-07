@@ -19,11 +19,6 @@ void WaveManager::Init()
 
     for (int i = 0; i < 10; i++)
     {
-        Enemy* enemy = new MeleeEnemy;
-        m_enemyTable[(int)ENEMY_TYPE::Tradian].push(enemy);
-    }
-    for (int i = 0; i < 10; i++)
-    {
         Enemy* enemy = new ElevenEnemy;
         m_enemyTable[(int)ENEMY_TYPE::Eleven].push(enemy);
     }
