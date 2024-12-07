@@ -139,6 +139,7 @@ void BossEnemy::Update()
 
 		if (bossBehaviorTimer >= m_attackCooldown)
 		{
+			GET_SINGLE(WaveManager)->SpawnEnemy(texByEnemies[m_rollIdx]);
 			m_bState = (int)BOSS_STATE::WAIT;
 			bossBehaviorTimer = 0;
 			curAnim = 0;
@@ -148,7 +149,6 @@ void BossEnemy::Update()
 
 void BossEnemy::Render(HDC _hdc)
 {
-
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 	m_vPos = { SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2};

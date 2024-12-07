@@ -105,7 +105,7 @@ void WaveManager::SpawnEnemy(ENEMY_TYPE types[], int cnt)
 {
     for (int i = 0; i < cnt; i++)
     {
-        Enemy* enemy;
+        Enemy* enemy = nullptr;
         switch (types[i])
         {
         case ENEMY_TYPE::Tradian:
@@ -124,8 +124,13 @@ void WaveManager::SpawnEnemy(ENEMY_TYPE types[], int cnt)
             enemy = new OrageEnemy;
             break;
         default:
-            cout << "³Í ¹¹¾ß" << µÎÀÌ;
+            enemy == nullptr;
             break;
+        }
+
+        if (enemy == nullptr)
+        {
+            cout << "¿¡±×ÀÎ´õÇï";
         }
         enemy->SetPos({ 150 * m_remainEnemyCnt, 300 });
         enemy->SetName(L"Enemy");
@@ -141,4 +146,5 @@ Vec2 WaveManager::GetRandomPosition()
 {
     std::uniform_real_distribution<float> rdValue(-1, 1);
     bool sign = std::signbit(rdValue(m_mt));
+    return { 0,0 };
 }
