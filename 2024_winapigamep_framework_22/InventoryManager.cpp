@@ -2,7 +2,6 @@
 #include "InventoryManager.h"
 #include "GDISelector.h"
 #include "InputManager.h"
-#include "Battery.h"
 #include "Texture.h"
 #include "Button.h"
 

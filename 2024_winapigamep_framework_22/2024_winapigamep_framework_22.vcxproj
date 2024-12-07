@@ -171,7 +171,6 @@
     <ClInclude Include="AStarNode.h" />
     <ClInclude Include="AStarPathFinder.h" />
     <ClInclude Include="BaseWindow.h" />
-    <ClInclude Include="Battery.h" />
     <ClInclude Include="BossEnemy.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Collider.h" />
@@ -220,7 +219,6 @@
     <ClCompile Include="AStarNode.cpp" />
     <ClCompile Include="AStarPathFinder.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
-    <ClCompile Include="Battery.cpp" />
     <ClCompile Include="BossEnemy.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -264,6 +262,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

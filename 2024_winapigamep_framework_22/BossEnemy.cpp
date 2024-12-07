@@ -111,7 +111,7 @@ void BossEnemy::Update()
 
 			if (curAnim >= m_rollTexLen)
 			{
-				if (m_forceJackpotCnt >= 5)
+				/*if (m_forceJackpotCnt >= 5)
 				{
 					std::uniform_int_distribution<int> typeIdx(0, m_jackpotTexLen);
 					m_forceJackpotCnt = 0;
@@ -119,7 +119,7 @@ void BossEnemy::Update()
 					m_pTex = m_jackpotTexs[idx];
 					m_bState = (int)BOSS_STATE(idx + ((int)BOSS_STATE::Jackpot_1 - 1));
 				}
-				else
+				else*/
 				{
 					m_forceJackpotCnt++;
 					m_bState = (int)BOSS_STATE::ATTACK;
