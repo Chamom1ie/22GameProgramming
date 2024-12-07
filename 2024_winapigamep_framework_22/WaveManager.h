@@ -19,9 +19,9 @@ public:
 	void Release();
 	bool IsWaveEnd();
 	void Push(ENEMY_TYPE type, Enemy* enemy) { m_enemyTable[(int)type].push(enemy); }
+	void SpawnEnemy(ENEMY_TYPE types[], int cnt = 3);
 private:
 	void SpawnWave();
-	void SpawnEnemy(ENEMY_TYPE types[], int cnt = 3);
 	Vec2 GetRandomPosition();
 private:
 	Wave m_waves[25];
