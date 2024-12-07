@@ -17,8 +17,8 @@ public:
 	void Update();
 	void Render(HDC _hdc);
 	void ToggleInventory();
-	int GetSeriCount() { return m_seriCount; }
-	int GetParaCount() { return m_paraCount; }
+	int GetPowerCount() { return m_seriCount; }
+	int GetGageCount() { return m_paraCount; }
 private:
 	bool m_activeSelf = false;
 	int m_InventorySize = SCREEN_WIDTH;

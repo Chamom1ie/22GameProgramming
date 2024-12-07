@@ -32,16 +32,6 @@ void InventoryManager::Update()
 {
 	if (m_activeSelf)
 	{
-
-		#pragma region Test
-
-		if (GET_KEYDOWN(KEY_TYPE::H))
-		{
-			m_batteryCount++;
-		}
-
-		#pragma endregion
-
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON))
 		{
 			TryInteractToSeri(GET_MOUSEPOS);
