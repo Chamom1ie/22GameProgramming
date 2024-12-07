@@ -178,6 +178,9 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DollEnemy.h" />
+    <ClInclude Include="OrageEnemy.h" />
+    <ClInclude Include="TradianEnemy.h" />
     <ClInclude Include="XSlideEnemy.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enemy.h" />
@@ -224,6 +227,9 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DollEnemy.cpp" />
+    <ClCompile Include="OrageEnemy.cpp" />
+    <ClCompile Include="TradianEnemy.cpp" />
     <ClCompile Include="XSlideEnemy.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
